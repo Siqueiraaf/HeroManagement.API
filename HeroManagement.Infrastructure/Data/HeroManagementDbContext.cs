@@ -6,7 +6,7 @@ namespace HeroManagement.Infrastructure;
 public class HeroManagementDbContext(DbContextOptions<HeroManagementDbContext> options) : DbContext(options)
 {
     public DbSet<Heroi> Herois => Set<Heroi>();
-    public DbSet<Superpoder> Superpoderes => Set<Superpoder>();
+    public DbSet<Superpoderes> Superpoderes => Set<Superpoderes>();
     public DbSet<HeroiSuperpoder> HeroisSuperpoderes => Set<HeroiSuperpoder>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -17,7 +17,7 @@ public class HeroManagementDbContext(DbContextOptions<HeroManagementDbContext> o
             entity.HasKey(h => h.Id);
         });
 
-        modelBuilder.Entity<Superpoder>(entity =>
+        modelBuilder.Entity<Superpoderes>(entity =>
         {
             entity.ToTable("Superpoderes");
             entity.HasKey(s => s.Id);

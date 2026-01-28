@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="8.1.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.1.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\HeroManagement.Application\HeroManagement.Application.csproj" />
+    <ProjectReference Include="..\HeroManagement.Infrastructure\HeroManagement.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -43,5 +43,4 @@ public class HeroiRepository(HeroManagementDbContext context) : IHeroiRepository
     {
         await _context.SaveChangesAsync();
     }
-        
 }
