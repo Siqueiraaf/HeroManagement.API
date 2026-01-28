@@ -4,7 +4,7 @@ public record CriarHeroiDto(
     string Nome,
     string NomeHeroi,
     DateTime DataNascimento,
-    double Altura,
-    double Peso,
+    float Altura,
+    float Peso,
     List<int> SuperpoderesIds
 );

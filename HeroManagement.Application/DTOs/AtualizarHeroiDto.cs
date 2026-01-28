@@ -2,10 +2,10 @@
 
 public record AtualizarHeroiDto(
     int Id,
-    string? Nome,
-    string? NomeHeroi,
-    DateTime? DataNascimento,
-    double? Altura,
-    double? Peso,
-    List<int>? SuperpoderesIds
+    string? Nome = default!,
+    string? NomeHeroi = default!,
+    DateTime? DataNascimento = null,
+    float? Altura = default!,
+    float? Peso = default!,
+    List<int>? SuperpoderesIds = default!
 );

@@ -1,9 +1,4 @@
 ﻿using HeroManagement.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HeroManagement.Application;
 
@@ -15,4 +10,5 @@ public interface IHeroiRepository
     Task AtualizarHeroiAsync(Heroi heroi);
     Task RemoverHeroiAsync(Heroi heroi);
     Task SalvarHeroiAsync();
+    Task<Heroi?> ObterHeroiPorNomeHeroiAsync(string nomeHeroi);
 }

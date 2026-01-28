@@ -26,17 +26,21 @@ public class HeroiRepository(HeroManagementDbContext context) : IHeroiRepository
         .Include(heroi => heroi.HeroisSuperpoderes)
         .ToListAsync();
     }
-
-    public Task AtualizarHeroiAsync(Heroi heroi)
+    public async Task<Heroi?> ObterHeroiPorNomeHeroiAsync(string nomeHeroi)
     {
-        _context.Herois.Update(heroi);
-        return Task.CompletedTask;
+        return await _context.Herois
+            .Include(heroi => heroi.HeroisSuperpoderes)
+            .FirstOrDefaultAsync(heroi => heroi.NomeHeroi == nomeHeroi);
     }
 
-    public Task RemoverHeroiAsync(Heroi heroi)
+    public async Task AtualizarHeroiAsync(Heroi heroi)
     {
-        _context.Herois.Remove(heroi);
-        return Task.CompletedTask;
+        _context.Herois.Update(heroi);
+    }
+
+    public async Task RemoverHeroiAsync(Heroi heroi)
+    {
+         _context.Herois.Remove(heroi);
     }
 
     public async Task SalvarHeroiAsync()
