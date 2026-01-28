@@ -10,4 +10,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HeroManagement.Application\HeroManagement.Application.csproj" />
+  </ItemGroup>
+
 </Project>

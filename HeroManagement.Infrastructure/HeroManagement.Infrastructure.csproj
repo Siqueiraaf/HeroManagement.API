@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HeroManagement.Domain\HeroManagement.Domain.csproj" />
+    <ProjectReference Include="..\HeroManagement.Application\HeroManagement.Application.csproj" />
   </ItemGroup>
 
 </Project>

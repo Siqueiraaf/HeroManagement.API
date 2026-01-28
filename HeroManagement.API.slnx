@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="HeroManagement.API/HeroManagement.API.csproj" />
+  <Project Path="HeroManagement.Application/HeroManagement.Application.csproj" Id="9b3f74ef-1c4d-4887-b743-56b20600d9a1" />
   <Project Path="HeroManagement.Domain/HeroManagement.Domain.csproj" Id="08a69eee-76a4-4933-b01d-3110925aa6b7" />
   <Project Path="HeroManagement.Infrastructure/HeroManagement.Infrastructure.csproj" Id="c58c0032-8667-4852-8485-e2c8d26c9e17" />
 </Solution>
