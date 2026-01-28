@@ -27,6 +27,16 @@ builder.Services.AddControllers()
 builder.Services.AddScoped<IHeroiService, HeroiService>();
 builder.Services.AddScoped<IHeroiRepository, HeroiRepository>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200") // URL do seu Angular
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -43,10 +53,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseCors("AllowAngular");
 
 app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseMiddleware<ApiResponseMiddleware>();
+
+app.UseAuthorization();
 
 app.MapControllers();
 
