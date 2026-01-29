@@ -1,7 +1,6 @@
 ﻿namespace HeroManagement.Application;
 
-public abstract class AppException : Exception
+public abstract class AppException(string message) : Exception(message)
 {
-    protected AppException(string message) : base(message) { }
     public abstract int StatusCode { get; }
 }

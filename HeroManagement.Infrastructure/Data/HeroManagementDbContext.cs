@@ -3,8 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HeroManagement.Infrastructure;
 
-public class HeroManagementDbContext(DbContextOptions<HeroManagementDbContext> options) : DbContext(options)
+public class HeroManagementDbContext : DbContext
 {
+    public HeroManagementDbContext(DbContextOptions<HeroManagementDbContext> options)
+        : base(options) { }
+
     public DbSet<Heroi> Herois => Set<Heroi>();
     public DbSet<Superpoderes> Superpoderes => Set<Superpoderes>();
     public DbSet<HeroiSuperpoder> HeroisSuperpoderes => Set<HeroiSuperpoder>();

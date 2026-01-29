@@ -1,23 +1,22 @@
 ﻿using HeroManagement.Application;
-using HeroManagement.Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HeroManagement.API;
 
 [ApiController]
-[Route("api/heroi")]
+[Route("api/herois")]
 public class HeroManagementController(IHeroiService service) : ControllerBase
 {
     private readonly IHeroiService _service = service;
 
-    [HttpPost("criar-heroi")]
-    public async Task<IActionResult> CriarHeroi([FromBody]CriarHeroiDto dto)
+    [HttpPost("create")]
+    public async Task<IActionResult> CriarHeroi([FromBody] CriarHeroiDto dto)
     {
         var id = await _service.CriarHeroiAsync(dto);
-        return CreatedAtAction(nameof(ObterHeroiPorId), new { id }, null);
+        return Ok(new { id });
     }
 
-    [HttpGet("buscar-heroi-por-{id}")]
+    [HttpGet("search/{id}")]
     public async Task<IActionResult> ObterHeroiPorId(int id)
     {
         var heroi = await _service.ObterHeroiPorIdAsync(id);
@@ -26,25 +25,24 @@ public class HeroManagementController(IHeroiService service) : ControllerBase
         return Ok(heroi);
     }
 
-    [HttpGet("buscar-todos-herois")]
+    [HttpGet("search")]
     public async Task<IActionResult> ObterTodosHerois()
     {
         var herois = await _service.ObterTodosHeroisAsync();
         return Ok(herois);
     }
 
-    [HttpPut("atualizar-heroi-{id}")]
-    public async Task<Heroi> AtualizarHeroi(int id, [FromBody] AtualizarHeroiDto dto)
+    [HttpPut("update/{id}")]
+    public async Task<IActionResult> AtualizarHeroi(int id, [FromBody] AtualizarHeroiDto dto)
     {
         await _service.AtualizarHeroiAsync(id, dto);
-        var heroiAtualizado = await _service.ObterHeroiPorIdAsync(id);
-        return heroiAtualizado!;
+        return Ok(new { id });
     }
 
-    [HttpDelete("deletar-heroi-{id}")]
+    [HttpDelete("delete/{id}")]
     public async Task<IActionResult> RemoverHeroi(int id)
     {
         await _service.RemoverHeroiAsync(id);
-        return Ok();
+        return Ok(new { id });
     }
 }

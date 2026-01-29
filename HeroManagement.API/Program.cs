@@ -1,3 +1,4 @@
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using HeroManagement.API;
 using HeroManagement.Application;
@@ -7,8 +8,6 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -17,24 +16,22 @@ builder.Services.AddDbContext<HeroManagementDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("HeroManagementConnection")));
 
-builder.Services.AddControllers()
-    .AddFluentValidation(fv =>
-    {
-        fv.RegisterValidatorsFromAssemblyContaining<AtualizarHeroiDtoValidator>();
-        fv.RegisterValidatorsFromAssemblyContaining<CriarHeroiDtoValidator>();
-    });
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddFluentValidationClientsideAdapters();
+
+builder.Services.AddValidatorsFromAssemblyContaining<AtualizarHeroiDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<CriarHeroiDtoValidator>();
 
 builder.Services.AddScoped<IHeroiService, HeroiService>();
 builder.Services.AddScoped<IHeroiRepository, HeroiRepository>();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAngular", policy =>
-    {
-        policy.WithOrigins("http://localhost:4200") // URL do seu Angular
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-    });
+    options.AddPolicy("AllowAngular",
+        policy =>
+            policy.WithOrigins("http://localhost:4200")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod());
 });
 
 var app = builder.Build();
@@ -48,8 +45,6 @@ if (app.Environment.IsDevelopment())
         c.RoutePrefix = string.Empty;
     });
 }
-
-// Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
 
