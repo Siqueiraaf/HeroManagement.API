@@ -92,8 +92,7 @@ Camada mais externa
 Não contém regra de negócio  
 
 ## Banco de Dados
-Escolhi o SQL Server e deixo aqui o script da criação do banco conforme a documentação.
-Deixo 2 scripts que utilizei um deles com mock.
+Escolhi o SQL Server aqui consta 2 scripts da criação do banco. Utilizei um deles com mock.
 ```sql
 CREATE TABLE Superpoderes (
     Id INT IDENTITY PRIMARY KEY,
