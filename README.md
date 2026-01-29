@@ -132,14 +132,14 @@ Base URL: `https://localhost:7052/api/herois`
 
 ## Frontend (Angular 16)
 Funcionalidades:
-
 - Criar herói
 - Listar heróis
 - Buscar herói por ID
 - Atualizar herói
 - Deletar herói
 - Selecionar múltiplos superpoderes
-- Tecnologias
+
+Tecnologias:
 - Angular 16
 - Reactive Forms
 - Standalone Components
