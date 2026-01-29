@@ -117,6 +117,85 @@ CREATE TABLE HeroisSuperpoderes (
     CONSTRAINT FK_Superpoderes FOREIGN KEY (SuperpoderId) REFERENCES Superpoderes(Id)
 );
 ```
+```
+-- =============================================
+-- Scripts de Criação das Tabelas - Super Heróis
+-- Banco de Dados: SQL Server
+-- =============================================
+
+-- Criação do banco de dados (opcional)
+-- CREATE DATABASE SuperHeroesDB;
+-- GO
+-- USE SuperHeroesDB;
+-- GO
+
+-- Tabela Superpoderes
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Superpoderes')
+BEGIN
+    CREATE TABLE Superpoderes (
+        Id INT PRIMARY KEY IDENTITY(1,1),
+        Superpoder NVARCHAR(50) NOT NULL,
+        Descricao NVARCHAR(250) NULL
+    );
+END
+GO
+
+-- Tabela Herois
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Herois')
+BEGIN
+    CREATE TABLE Herois (
+        Id INT PRIMARY KEY IDENTITY(1,1),
+        Nome NVARCHAR(120) NOT NULL,
+        NomeHeroi NVARCHAR(120) NOT NULL,
+        DataNascimento DATETIME2(7) NOT NULL,
+        Altura FLOAT NOT NULL,
+        Peso FLOAT NOT NULL
+    );
+END
+GO
+
+-- Tabela HeroisSuperpoderes (Relacionamento N-N)
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'HeroisSuperpoderes')
+BEGIN
+    CREATE TABLE HeroisSuperpoderes (
+        HeroiId INT NOT NULL,
+        SuperpoderId INT NOT NULL,
+        CONSTRAINT PK_HeroisSuperpoderes PRIMARY KEY (HeroiId, SuperpoderId),
+        CONSTRAINT FK_HeroisSuperpoderes_Herois FOREIGN KEY (HeroiId) 
+            REFERENCES Herois(Id) ON DELETE CASCADE,
+        CONSTRAINT FK_HeroisSuperpoderes_Superpoderes FOREIGN KEY (SuperpoderId) 
+            REFERENCES Superpoderes(Id) ON DELETE CASCADE
+    );
+END
+GO
+
+-- Inserção de Superpoderes iniciais (opcional)
+IF NOT EXISTS (SELECT * FROM Superpoderes)
+BEGIN
+    INSERT INTO Superpoderes (Superpoder, Descricao) VALUES
+    ('Super Força', 'Capacidade de levantar objetos extremamente pesados'),
+    ('Voo', 'Capacidade de voar e levitar'),
+    ('Velocidade', 'Capacidade de se mover em velocidades sobre-humanas'),
+    ('Invisibilidade', 'Capacidade de se tornar invisível'),
+    ('Telepatia', 'Capacidade de ler mentes'),
+    ('Regeneração', 'Capacidade de curar ferimentos rapidamente'),
+    ('Controle de Fogo', 'Capacidade de criar e controlar o fogo'),
+    ('Controle de Gelo', 'Capacidade de criar e controlar o gelo'),
+    ('Raios Laser', 'Capacidade de emitir raios de energia pelos olhos'),
+    ('Elasticidade', 'Capacidade de esticar o corpo'),
+    ('Telecinese', 'Capacidade de mover objetos com a mente'),
+    ('Super Inteligência', 'Inteligência muito acima da média humana');
+END
+GO
+
+-- Índices para otimização de consultas
+CREATE NONCLUSTERED INDEX IX_Herois_Nome ON Herois(Nome);
+CREATE NONCLUSTERED INDEX IX_Herois_NomeHeroi ON Herois(NomeHeroi);
+GO
+
+PRINT 'Tabelas criadas com sucesso!';
+GO
+```
 
 ## Endpoints da API
 Base URL: `https://localhost:7052/api/herois`
